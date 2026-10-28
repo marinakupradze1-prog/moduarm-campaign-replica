@@ -33,12 +33,6 @@ export function RobotArm({ mode = "hero", className = "" }: { mode?: Mode; class
     >
       <rect x="70" y="262" width="100" height="22" rx="8" className="fill-secondary" />
       <rect x="95" y="245" width="50" height="22" rx="6" className="fill-dark-muted" />
-      {mode === "step3" && (
-        <g className="work-board">
-          <rect x="225" y="160" width="90" height="10" rx="3" className="fill-dark-muted" />
-          <rect x="255" y="156" width="30" height="4" rx="2" className="fill-primary" />
-        </g>
-      )}
       <g className="arm-s1">
         <line x1="120" y1="250" x2="120" y2="160" strokeWidth="24" strokeLinecap="round" className="stroke-primary" />
         <circle cx="120" cy="250" r="14" className="fill-secondary" />
@@ -57,9 +51,11 @@ export function RobotArm({ mode = "hero", className = "" }: { mode?: Mode; class
             )}
             {mode === "step3" && (
               <>
+                <rect x="236" y="150" width="68" height="9" rx="3" className="fill-dark-muted stroke-secondary" strokeWidth="1.5" />
+                <rect x="258" y="146" width="24" height="5" rx="2" className="fill-primary" />
                 <Module />
                 <circle className="work-light fill-primary" cx="270" cy="116" r="5" />
-                <circle className="work-spark fill-primary" cx="270" cy="156" r="6" />
+                <circle className="work-spark fill-primary" cx="270" cy="162" r="5" />
               </>
             )}
           </g>

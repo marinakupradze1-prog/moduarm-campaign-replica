@@ -111,7 +111,7 @@ function Index() {
           <p className="text-xl font-extrabold">Modu<span className="text-primary">Arm</span></p>
           <div className="mt-10 grid items-center gap-10 md:grid-cols-2">
             <Reveal>
-              <h1 className="text-5xl font-extrabold leading-tight md:text-6xl">შენი პროექტის <span className="text-primary">მესამე ხელი</span></h1>
+              <h1 className="text-5xl font-extrabold leading-tight md:text-6xl">შენი პროექტის <span className="text-metal">მესამე ხელი</span></h1>
               <p className="mt-6 max-w-md text-xl text-muted-foreground">მოდულური რობოტი ხელის იდეა სტუდენტებისა და მეიქერებისთვის.</p>
               <a href="#waitlist" className={`${btn} mt-8`}>შემატყობინე გაშვებისას</a>
             </Reveal>
@@ -152,9 +152,8 @@ function Index() {
             ))}
           </div>
           {task !== null && (
-            <div key={task} className="reveal in mt-6 rounded-3xl bg-secondary p-8 text-secondary-foreground">
-              <span className="rounded-full bg-primary px-3 py-1 text-sm font-semibold text-primary-foreground">მაგალითი</span>
-              <h3 className="mt-4 text-2xl font-semibold">{tasks[task]!.module}</h3>
+            <div key={task} className="reveal in mt-6 rounded-3xl bg-silver p-8 text-secondary-foreground">
+                            <h3 className="text-2xl font-semibold">{tasks[task]!.module}</h3>
               <p className="mt-2 text-dark-muted-foreground">{tasks[task]!.text}</p>
             </div>
           )}
