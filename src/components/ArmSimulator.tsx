@@ -1,4 +1,5 @@
 import { useRef, useState, type ReactNode } from "react";
+import { IconCheck, IconSpark } from "@/components/Icons";
 
 type Vec = { x: number; y: number };
 
@@ -111,7 +112,9 @@ export function ArmSimulator() {
 
   const CheckItem = ({ done, label }: { done: boolean; label: string }) => (
     <li className={`flex items-center gap-3 rounded-2xl border-2 p-4 transition-colors ${done ? "border-primary bg-primary/10" : "border-transparent bg-dark-muted/40"}`}>
-      <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-sm font-bold transition-colors ${done ? "bg-primary text-primary-foreground" : "bg-dark-muted text-dark-muted-foreground"}`}>{done ? "✓" : "•"}</span>
+      <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition-colors ${done ? "bg-primary text-primary-foreground" : "bg-dark-muted text-dark-muted-foreground"}`}>
+        {done ? <IconCheck className="h-5 w-5" /> : <span className="text-xs font-bold">{""}</span>}
+      </span>
       <span className={`text-base font-semibold ${done ? "text-primary" : "text-dark-muted-foreground"}`}>{label}</span>
     </li>
   );
@@ -228,7 +231,10 @@ export function ArmSimulator() {
 
             {success ? (
               <Reveal className="rounded-3xl bg-primary p-8 text-primary-foreground">
-                <h3 className="text-2xl font-extrabold">შენი ორივე ხელი თავისუფალია! 🎉</h3>
+                <h3 className="flex items-center gap-3 text-2xl font-extrabold">
+                  <IconSpark className="h-7 w-7" />
+                  შენი ორივე ხელი თავისუფალია!
+                </h3>
                 <p className="mt-2 text-primary-foreground/80">ModuArm უძრავად იჭერს დაფას — შენ აგრძელებ მუშაობას.</p>
                 <a
                   href="#waitlist"

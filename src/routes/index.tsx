@@ -3,6 +3,7 @@ import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "rea
 import { RobotArm } from "@/components/RobotArm";
 import type { Tool } from "@/components/RobotArm";
 import { ArmSimulator } from "@/components/ArmSimulator";
+import { IconPrice, IconHand, IconGear, moduleIcons, IconHeart } from "@/components/Icons";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -37,10 +38,10 @@ function Reveal({ children, className = "" }: { children: ReactNode; className?:
 
 const btn = "inline-flex items-center justify-center rounded-full bg-metal px-8 py-4 text-lg font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40";
 
-const problems = [
-  { icon: "₾", title: "ძალიან ძვირი", text: "სამრეწველო რობოტი ხელები ბევრად მეტი ღირს, ვიდრე სტუდენტს ან მეიქერს შეუძლია დახარჯოს." },
-  { icon: "✋", title: "ზედმეტი ხელით სამუშაო", text: "რჩილვა ან გადაღება ხშირად დამატებით ხელებს მოითხოვს, რომლებიც არ გაქვს." },
-  { icon: "⚙", title: "ძალიან რთული", text: "რობოტიკის ინსტრუმენტების ათვისებას დიდი დრო სჭირდება." },
+const problems: { icon: ReactNode; title: string; text: string }[] = [
+  { icon: <IconPrice className="h-7 w-7 text-primary-foreground" />, title: "ძალიან ძვირი", text: "სამრეწველო რობოტი ხელები ბევრად მეტი ღირს, ვიდრე სტუდენტს ან მეიქერს შეუძლია დახარჯოს." },
+  { icon: <IconHand className="h-7 w-7 text-primary-foreground" />, title: "ზედმეტი ხელით სამუშაო", text: "რჩილვა ან გადაღება ხშირად დამატებით ხელებს მოითხოვს, რომლებიც არ გაქვს." },
+  { icon: <IconGear className="h-7 w-7 text-primary-foreground" />, title: "ძალიან რთული", text: "რობოტიკის ინსტრუმენტების ათვისებას დიდი დრო სჭირდება." },
 ];
 
 const steps = [
@@ -50,14 +51,14 @@ const steps = [
 ];
 
 const modules = [
-  { icon: "🔥", name: "რჩილვა", tool: "grip" as const, module: "GripFix მოდული", text: "მყარად იჭერს დაფას ან სადენს, რომ ორივე ხელი თავისუფალი გქონდეს." },
-  { icon: "🎥", name: "გადაღება", tool: "camera" as const, module: "CamMount მოდული", text: "ტელეფონს ან კამერას ნელა ამოძრავებს და სტაბილურ კადრს გაძლევს." },
-  { icon: "🔩", name: "დახარისხება", tool: "sorter" as const, module: "PickSort მოდული", text: "ჭანჭიკებსა და ნაწილებს ფერის ან ზომის მიხედვით ალაგებს." },
-  { icon: "📐", name: "დაჭერა", tool: "hold" as const, module: "HoldPad მოდული", text: "აწებებისას ან ჭრისას მასალას სწორ კუთხეზე აჩერებს." },
-  { icon: "🧹", name: "გაწმენდა", tool: "brush" as const, module: "SpinBrush მოდული", text: "მბრუნავი ჯაგრავი ზედაპირს ან დეტალებს წმენდს მტვრისგან." },
-  { icon: "✏️", name: "დახატვა", tool: "pen" as const, module: "PenGuide მოდული", text: "ფერადი ან მარკერის სტაბილურად დაჭერა ზუსტი ხაზებისთვის." },
-  { icon: "🌀", name: "ვაკუუმი", tool: "suction" as const, module: "VacuGrip მოდული", text: "ვაკუუმის საწოვარი ფისფარ ზედაპირს ზიანის გარეშე იჭერს." },
-  { icon: "💡", name: "განათება", tool: "led" as const, module: "BeamLight მოდული", text: "მართვადი LED წერტილოვნად ანათებს სამუშაო ადგილს." },
+  { icon: moduleIcons.grip, name: "რჩილვა", tool: "grip" as const, module: "GripFix მოდული", text: "მყარად იჭერს დაფას ან სადენს, რომ ორივე ხელი თავისუფალი გქონდეს." },
+  { icon: moduleIcons.camera, name: "გადაღება", tool: "camera" as const, module: "CamMount მოდული", text: "ტელეფონს ან კამერას ნელა ამოძრავებს და სტაბილურ კადრს გაძლევს." },
+  { icon: moduleIcons.sorter, name: "დახარისხება", tool: "sorter" as const, module: "PickSort მოდული", text: "ჭანჭიკებსა და ნაწილებს ფერის ან ზომის მიხედვით ალაგებს." },
+  { icon: moduleIcons.hold, name: "დაჭერა", tool: "hold" as const, module: "HoldPad მოდული", text: "აწებებისას ან ჭრისას მასალას სწორ კუთხეზე აჩერებს." },
+  { icon: moduleIcons.brush, name: "გაწმენდა", tool: "brush" as const, module: "SpinBrush მოდული", text: "მბრუნავი ჯაგრავი ზედაპირს ან დეტალებს წმენდს მტვრისგან." },
+  { icon: moduleIcons.pen, name: "დახატვა", tool: "pen" as const, module: "PenGuide მოდული", text: "ფერადი ან მარკერის სტაბილურად დაჭერა ზუსტი ხაზებისთვის." },
+  { icon: moduleIcons.suction, name: "ვაკუუმი", tool: "suction" as const, module: "VacuGrip მოდული", text: "ვაკუუმის საწოვარი ფისფარ ზედაპირს ზიანის გარეშე იჭერს." },
+  { icon: moduleIcons.led, name: "განათება", tool: "led" as const, module: "BeamLight მოდული", text: "მართვადი LED წერტილოვნად ანათებს სამუშაო ადგილს." },
 ];
 
 function DaySection() {
@@ -141,7 +142,7 @@ function SwapSection() {
                 aria-pressed={active === i}
                 className={`lift rounded-3xl border-2 bg-card p-5 text-left transition-colors ${active === i ? "border-primary swap-chip-active" : "border-transparent"}`}
               >
-                <span className="text-2xl" aria-hidden>{mod.icon}</span>
+                <span className="text-secondary-foreground" aria-hidden>{(() => { const I = mod.icon; return <I className="h-7 w-7" />; })()}</span>
                 <span className="mt-2 block text-base font-semibold leading-snug">{mod.name}</span>
               </button>
             ))}
@@ -188,7 +189,7 @@ function Index() {
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {problems.map((p) => (
               <Reveal key={p.title} className="rounded-3xl bg-card p-8">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-metal text-2xl text-primary-foreground">{p.icon}</div>
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-metal text-primary-foreground">{p.icon}</div>
                 <h3 className="mt-5 text-2xl font-semibold">{p.title}</h3>
                 <p className="mt-2 text-muted-foreground">{p.text}</p>
               </Reveal>
@@ -209,7 +210,10 @@ function Index() {
           <h2 className="text-4xl font-extrabold md:text-5xl">შეუერთდი მოლოდინის სიას</h2>
           {sent ? (
             <div className="mt-10 rounded-3xl bg-dark-muted p-8" role="status">
-              <p className="text-2xl font-semibold text-primary">გმადლობ! 🤍</p>
+              <p className="flex items-center gap-3 text-2xl font-semibold text-primary">
+                <IconHeart className="h-7 w-7 text-primary" />
+                გმადლობ!
+              </p>
               <p className="mt-2 text-dark-muted-foreground">ეს სადემონსტრაციო ფორმაა — შენი მონაცემები არსად შეინახება.</p>
             </div>
           ) : (
