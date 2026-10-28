@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { RobotArm } from "@/components/RobotArm";
 import type { Tool } from "@/components/RobotArm";
+import { ArmSimulator } from "@/components/ArmSimulator";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -197,6 +198,8 @@ function Index() {
       </section>
 
       <DaySection />
+
+      <ArmSimulator />
 
       <SwapSection />
 

@@ -238,3 +238,32 @@ body { font-family: var(--font-sans); font-size: 1.125rem; line-height: 1.65; }
 .led-core { animation-duration: .9s; }
 @keyframes suctionPulse { 0%,100% { opacity: .25; transform: scale(.8) } 50% { opacity: .6; transform: scale(1) } }
 .suction-glow { transform-box: fill-box; transform-origin: center; animation: suctionPulse 1.1s ease-in-out infinite; }
+@keyframes simHint { 0%,100% { opacity: .4 } 50% { opacity: .8 } }
+.sim-hint { animation: simHint 1.2s ease-in-out infinite; }
+.sim-svg .sim-jaw-l, .sim-svg .sim-jaw-r { transition: transform .25s ease; }
+.sim-slider {
+  -webkit-appearance: none; appearance: none;
+  height: 8px; border-radius: 4px; outline: none;
+  background: oklch(0.3 0.012 255);
+}
+.sim-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: linear-gradient(180deg, oklch(0.93 0.005 250), oklch(0.74 0.012 250) 55%, oklch(0.86 0.008 250));
+  border: 2px solid oklch(0.2 0.01 255);
+  box-shadow: 0 2px 6px oklch(0 0 0 / 0.5);
+  cursor: pointer;
+}
+.sim-slider::-moz-range-thumb {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: linear-gradient(180deg, oklch(0.93 0.005 250), oklch(0.74 0.012 250) 55%, oklch(0.86 0.008 250));
+  border: 2px solid oklch(0.2 0.01 255);
+  box-shadow: 0 2px 6px oklch(0 0 0 / 0.5);
+  cursor: pointer;
+}
+.sim-slider::-webkit-slider-thumb:active { transform: scale(1.1); }
+.sim-slider::-moz-range-thumb:active { transform: scale(1.1); }
+@media (prefers-reduced-motion: reduce) {
+  .sim-hint { animation: none !important; }
+  .sim-svg .sim-jaw-l, .sim-svg .sim-jaw-r { transition: none !important; }
+}
