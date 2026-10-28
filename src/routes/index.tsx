@@ -66,7 +66,7 @@ function DaySection() {
     return () => io.disconnect();
   }, []);
   return (
-    <section className="bg-secondary px-6 py-24 text-secondary-foreground">
+    <section className="bg-gunmetal px-6 py-24 text-secondary-foreground">
       <div className="mx-auto max-w-6xl">
         <Reveal><h2 className="text-4xl font-extrabold md:text-5xl">ერთი დღე ModuArm-თან</h2></Reveal>
         <div className="mt-12 grid gap-10 md:grid-cols-2">
@@ -115,7 +115,7 @@ function Index() {
               <p className="mt-6 max-w-md text-xl text-muted-foreground">მოდულური რობოტი ხელის იდეა სტუდენტებისა და მეიქერებისთვის.</p>
               <a href="#waitlist" className={`${btn} mt-8`}>შემატყობინე გაშვებისას</a>
             </Reveal>
-            <div className="rounded-3xl bg-muted p-6"><RobotArm className="mx-auto h-72 w-full md:h-96" /></div>
+            <div className="rounded-3xl bg-silver p-6"><RobotArm className="mx-auto h-72 w-full md:h-96" /></div>
           </div>
         </div>
       </section>
@@ -162,12 +162,12 @@ function Index() {
       </section>
 
       {/* Waitlist */}
-      <section id="waitlist" className="bg-secondary px-6 py-24 text-secondary-foreground">
+      <section id="waitlist" className="bg-gunmetal px-6 py-24 text-secondary-foreground">
         <Reveal className="mx-auto max-w-xl">
           <h2 className="text-4xl font-extrabold md:text-5xl">შეუერთდი მოლოდინის სიას</h2>
           {sent ? (
             <div className="mt-10 rounded-3xl bg-dark-muted p-8" role="status">
-              <p className="text-2xl font-semibold text-primary">გმადლობ! 🧡</p>
+              <p className="text-2xl font-semibold text-primary">გმადლობ! 🤍</p>
               <p className="mt-2 text-dark-muted-foreground">ეს სადემონსტრაციო ფორმაა — შენი მონაცემები არსად შეინახება.</p>
             </div>
           ) : (
