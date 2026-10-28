@@ -26,7 +26,7 @@ function Reveal({ children, className = "" }: { children: ReactNode; className?:
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const io = new IntersectionObserver(([e]) => e.isIntersecting && (el.classList.add("in"), io.disconnect()), { threshold: 0.15 });
+    const io = new IntersectionObserver(([e]) => e?.isIntersecting && (el.classList.add("in"), io.disconnect()), { threshold: 0.15 });
     io.observe(el);
     return () => io.disconnect();
   }, []);
@@ -59,7 +59,7 @@ function DaySection() {
   const refs = useRef<(HTMLDivElement | null)[]>([]);
   useEffect(() => {
     const io = new IntersectionObserver(
-      (es) => es.forEach((e) => e.isIntersecting && setActive(Number((e.target as HTMLElement).dataset.i))),
+      (es) => es.forEach((e) => e.isIntersecting && setActive(Number((e.target as HTMLElement).dataset["i"]))),
       { rootMargin: "-45% 0px -45% 0px" },
     );
     refs.current.forEach((r) => r && io.observe(r));
@@ -71,7 +71,7 @@ function DaySection() {
         <Reveal><h2 className="text-4xl font-extrabold md:text-5xl">ერთი დღე ModuArm-თან</h2></Reveal>
         <div className="mt-12 grid gap-10 md:grid-cols-2">
           <div className="sticky top-6 z-10 self-start rounded-3xl bg-dark-muted p-6 md:top-24">
-            <RobotArm key={steps[active].mode} mode={steps[active].mode} className="mx-auto h-56 w-full md:h-80" />
+            <RobotArm key={steps[active]!.mode} mode={steps[active]!.mode} className="mx-auto h-56 w-full md:h-80" />
             <p className="mt-2 text-center text-sm text-dark-muted-foreground">ნაბიჯი {active + 1} / 3</p>
           </div>
           <div className="space-y-[40vh] py-[10vh]">
@@ -154,8 +154,8 @@ function Index() {
           {task !== null && (
             <div key={task} className="reveal in mt-6 rounded-3xl bg-secondary p-8 text-secondary-foreground">
               <span className="rounded-full bg-primary px-3 py-1 text-sm font-semibold text-primary-foreground">მაგალითი</span>
-              <h3 className="mt-4 text-2xl font-semibold">{tasks[task].module}</h3>
-              <p className="mt-2 text-dark-muted-foreground">{tasks[task].text}</p>
+              <h3 className="mt-4 text-2xl font-semibold">{tasks[task]!.module}</h3>
+              <p className="mt-2 text-dark-muted-foreground">{tasks[task]!.text}</p>
             </div>
           )}
         </div>
