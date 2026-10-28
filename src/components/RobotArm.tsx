@@ -4,7 +4,7 @@ function MetalDefs() {
   return (
     <defs>
       {/* Brushed-metal cylinder shading for each arm segment */}
-      <linearGradient id="m1" x1="0" y1="0" x2="1" y2="0">
+      <linearGradient id="m1" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stopColor="oklch(0.4 0.012 258)" />
         <stop offset="22%" stopColor="oklch(0.88 0.006 250)" />
         <stop offset="48%" stopColor="oklch(0.6 0.01 253)" />
