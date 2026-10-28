@@ -97,17 +97,16 @@ function DaySection() {
 
 function SwapSection() {
   const [active, setActive] = useState(0);
-  const [swapping, setSwapping] = useState(false);
-  const [showTool, setShowTool] = useState(true);
+  const [displayTool, setDisplayTool] = useState<Tool>(modules[0]!.tool);
+  const [toolAnim, setToolAnim] = useState("swap-tool-in");
 
   const select = (i: number) => {
-    if (i === active || swapping) return;
-    setSwapping(true);
-    setShowTool(false);
+    if (i === active) return;
+    setToolAnim("swap-tool-out");
     window.setTimeout(() => {
-      setShowTool(true);
+      setDisplayTool(modules[i]!.tool as Tool);
       setActive(i);
-      setSwapping(false);
+      setToolAnim("swap-tool-in");
     }, 500);
   };
 
@@ -121,9 +120,9 @@ function SwapSection() {
           <div className="self-start rounded-3xl bg-silver p-6">
             <div className="relative mx-auto h-72 w-full md:h-96">
               <RobotArm
-                key={m.tool}
-                tool={m.tool as Tool}
-                className={`mx-auto h-72 w-full md:h-96 ${showTool ? "swap-tool-in" : "swap-tool-out"}`}
+                tool={displayTool}
+                toolAnim={toolAnim}
+                className="mx-auto h-72 w-full md:h-96"
                 mode="step3"
               />
             </div>
@@ -139,7 +138,6 @@ function SwapSection() {
                 key={mod.name}
                 onClick={() => select(i)}
                 aria-pressed={active === i}
-                disabled={swapping}
                 className={`lift rounded-3xl border-2 bg-card p-5 text-left transition-colors ${active === i ? "border-primary swap-chip-active" : "border-transparent"}`}
               >
                 <span className="text-2xl" aria-hidden>{mod.icon}</span>

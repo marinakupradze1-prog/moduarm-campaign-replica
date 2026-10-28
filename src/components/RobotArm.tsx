@@ -198,7 +198,7 @@ function ToolHead({ tool, className = "" }: { tool: Tool; className?: string }) 
   }
 }
 
-export function RobotArm({ mode = "hero", tool, className = "" }: { mode?: Mode; tool?: Tool; className?: string }) {
+export function RobotArm({ mode = "hero", tool, toolAnim = "", className = "" }: { mode?: Mode; tool?: Tool; toolAnim?: string; className?: string }) {
   const animate = mode === "hero" || mode === "step1";
   const showTool = tool !== undefined;
   return (
@@ -221,7 +221,9 @@ export function RobotArm({ mode = "hero", tool, className = "" }: { mode?: Mode;
             <line x1="210" y1="110" x2="265" y2="118" strokeWidth="18" strokeLinecap="round" stroke="url(#m3)" />
             <circle cx="210" cy="110" r="11" fill="url(#mJoint)" stroke="oklch(1 0 0 / 0.3)" strokeWidth="1" />
             {showTool && tool ? (
-              <ToolHead tool={tool} />
+              <g key={tool} className={toolAnim}>
+                <ToolHead tool={tool} />
+              </g>
             ) : mode === "step2" ? (
               <>
                 <Gripper className="tool-out" />
