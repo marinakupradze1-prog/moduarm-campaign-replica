@@ -33,7 +33,7 @@ function Reveal({ children, className = "" }: { children: ReactNode; className?:
   return <div ref={ref} className={`reveal ${className}`}>{children}</div>;
 }
 
-const btn = "inline-flex items-center justify-center rounded-full bg-primary px-8 py-4 text-lg font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40";
+const btn = "inline-flex items-center justify-center rounded-full bg-metal px-8 py-4 text-lg font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40";
 
 const problems = [
   { icon: "₾", title: "ძალიან ძვირი", text: "სამრეწველო რობოტი ხელები ბევრად მეტი ღირს, ვიდრე სტუდენტს ან მეიქერს შეუძლია დახარჯოს." },
@@ -127,7 +127,7 @@ function Index() {
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {problems.map((p) => (
               <Reveal key={p.title} className="rounded-3xl bg-card p-8">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-2xl text-primary-foreground">{p.icon}</div>
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-metal text-2xl text-primary-foreground">{p.icon}</div>
                 <h3 className="mt-5 text-2xl font-semibold">{p.title}</h3>
                 <p className="mt-2 text-muted-foreground">{p.text}</p>
               </Reveal>
