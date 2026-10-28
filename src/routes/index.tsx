@@ -171,9 +171,9 @@ function Index() {
       <section className="px-6 pb-20 pt-10 md:pt-16">
         <div className="mx-auto max-w-6xl">
           <p className="text-xl font-extrabold">Modu<span className="text-primary">Arm</span></p>
-          <div className="mt-10 grid items-center gap-10 md:grid-cols-2">
-            <Reveal>
-              <h1 className="text-5xl font-extrabold leading-tight md:text-6xl">მესამე ხელი <span className="text-metal">შენი პროექტისთვის</span></h1>
+          <div className="mt-10 grid grid-cols-1 items-center gap-10 md:grid-cols-2">
+            <Reveal className="min-w-0">
+              <h1 className="text-3xl font-extrabold leading-tight [overflow-wrap:anywhere] min-[400px]:text-4xl sm:text-5xl md:text-6xl">მესამე ხელი <span className="text-metal">შენი პროექტისთვის</span></h1>
               <p className="mt-6 max-w-md text-xl text-muted-foreground">მოდულური რობოტი ხელის იდეა სტუდენტებისა და ტექნოლოგიის ენთუზიასტებისთვის.</p>
               <a href="#waitlist" className={`${btn} mt-8`}>შემატყობინე გაშვებისას</a>
             </Reveal>
