@@ -84,7 +84,7 @@ export function RobotArm({ mode = "hero", className = "" }: { mode?: Mode; class
       <rect x="70" y="262" width="100" height="22" rx="8" fill="url(#mBase)" stroke="oklch(1 0 0 / 0.25)" strokeWidth="1" />
       <rect x="95" y="245" width="50" height="22" rx="6" fill="url(#mToolDark)" stroke="oklch(1 0 0 / 0.2)" strokeWidth="0.8" />
       <g className="arm-s1">
-        <line x1="120" y1="250" x2="120" y2="160" strokeWidth="24" strokeLinecap="round" stroke="url(#m1)" />
+        <line x1="120" y1="250" x2="120" y2="160" strokeWidth="24" strokeLinecap="round" stroke="red" />
         <circle cx="120" cy="250" r="14" fill="url(#mJoint)" stroke="oklch(1 0 0 / 0.3)" strokeWidth="1" />
         <g className="arm-s2">
           <line x1="120" y1="160" x2="210" y2="110" strokeWidth="22" strokeLinecap="round" stroke="url(#m2)" />
