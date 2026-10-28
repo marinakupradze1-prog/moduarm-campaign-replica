@@ -16,13 +16,13 @@ export function RobotArm({ mode = "hero", className = "" }: { mode?: Mode; class
         <rect x="215" y="230" width="90" height="12" rx="3" className="fill-dark-muted" />
       )}
       <g className="arm-s1">
-        <rect x="108" y="150" width="24" height="105" rx="12" className="fill-primary" />
+        <line x1="120" y1="250" x2="120" y2="160" strokeWidth="24" strokeLinecap="round" className="stroke-primary" />
         <circle cx="120" cy="250" r="14" className="fill-secondary" />
         <g className="arm-s2">
-          <rect x="112" y="98" width="110" height="24" rx="12" transform="rotate(-25 120 160)" className="fill-primary" />
+          <line x1="120" y1="160" x2="210" y2="110" strokeWidth="22" strokeLinecap="round" className="stroke-primary" />
           <circle cx="120" cy="160" r="13" className="fill-secondary" />
           <g className="arm-s3">
-            <rect x="200" y="100" width="70" height="20" rx="10" className="fill-primary" />
+            <line x1="210" y1="110" x2="265" y2="118" strokeWidth="18" strokeLinecap="round" className="stroke-primary" />
             <circle cx="210" cy="110" r="11" className="fill-secondary" />
             {mode !== "hero" && mode !== "step1" && (
               <g className={mode === "step2" ? "module-snap" : ""}>
