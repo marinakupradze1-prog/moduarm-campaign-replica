@@ -187,6 +187,17 @@ body { font-family: var(--font-sans); font-size: 1.125rem; line-height: 1.65; }
 .arm-anim .jaw-l { animation: jawL 2.5s ease-in-out infinite; }
 .arm-anim .jaw-r { animation: jawR 2.5s ease-in-out infinite; }
 .module-snap { animation: snap .9s cubic-bezier(.3,1.4,.5,1) forwards; }
+@keyframes toolOut { 0%,15% { transform: none; opacity: 1 } 60%,100% { transform: translate(40px,90px) rotate(25deg); opacity: 0 } }
+@keyframes toolIn { 0%,45% { transform: translate(60px,-70px); opacity: 0 } 85% { transform: translate(0,3px); opacity: 1 } 100% { transform: none; opacity: 1 } }
+.tool-out, .tool-in { transform-box: fill-box; transform-origin: center; }
+.tool-out { animation: toolOut 1.6s ease-in forwards; }
+.tool-in { opacity: 0; animation: toolIn 1.6s cubic-bezier(.3,1.3,.5,1) forwards; }
+@keyframes lookS1 { 0%,100% { transform: translate(120px,250px) rotate(-10deg) translate(-120px,-250px) } 30% { transform: translate(120px,250px) rotate(8deg) translate(-120px,-250px) } 65% { transform: translate(120px,250px) rotate(-2deg) translate(-120px,-250px) } }
+@keyframes lookS2 { 0%,100% { transform: translate(120px,160px) rotate(10deg) translate(-120px,-160px) } 30% { transform: translate(120px,160px) rotate(-22deg) translate(-120px,-160px) } 65% { transform: translate(120px,160px) rotate(-8deg) translate(-120px,-160px) } }
+@keyframes lookS3 { 0%,100% { transform: translate(210px,110px) rotate(25deg) translate(-210px,-110px) } 20% { transform: translate(210px,110px) rotate(-35deg) translate(-210px,-110px) } 45% { transform: translate(210px,110px) rotate(-10deg) translate(-210px,-110px) } 75% { transform: translate(210px,110px) rotate(-45deg) translate(-210px,-110px) } }
+.arm-look .arm-s1 { animation: lookS1 7s ease-in-out infinite; }
+.arm-look .arm-s2 { animation: lookS2 7s ease-in-out infinite; }
+.arm-look .arm-s3 { animation: lookS3 7s ease-in-out infinite; }
 
 .lift { transition: transform .25s ease, box-shadow .25s ease, border-color .25s; }
 .lift:hover, .lift:active { transform: translateY(-6px); box-shadow: 0 12px 24px -12px oklch(0.245 0.009 255 / 0.3); }
