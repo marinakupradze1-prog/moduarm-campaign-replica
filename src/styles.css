@@ -229,3 +229,12 @@ body { font-family: var(--font-sans); font-size: 1.125rem; line-height: 1.65; }
 .arm-work .arm-s3 { animation: workS3 1.4s ease-in-out infinite; }
 .arm-work .work-light { animation: blink .7s steps(2) infinite; }
 .work-spark { transform-box: fill-box; transform-origin: center; animation: spark 1.4s ease-out infinite; }
+@keyframes recBlink { 0%,100% { opacity: 1 } 50% { opacity: .25 } }
+.cam-rec { transform-box: fill-box; transform-origin: center; animation: recBlink 1.2s ease-in-out infinite; }
+@keyframes brushSpin { to { transform: rotate(360deg) } }
+.brush-spin { transform-box: fill-box; transform-origin: center; animation: brushSpin 1.5s linear infinite; }
+@keyframes ledPulse { 0%,100% { opacity: .5; transform: scale(.9) } 50% { opacity: 1; transform: scale(1.1) } }
+.led-glow, .led-core { transform-box: fill-box; transform-origin: center; animation: ledPulse 1.3s ease-in-out infinite; }
+.led-core { animation-duration: .9s; }
+@keyframes suctionPulse { 0%,100% { opacity: .25; transform: scale(.8) } 50% { opacity: .6; transform: scale(1) } }
+.suction-glow { transform-box: fill-box; transform-origin: center; animation: suctionPulse 1.1s ease-in-out infinite; }

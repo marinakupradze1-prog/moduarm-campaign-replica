@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { RobotArm } from "@/components/RobotArm";
+import type { Tool } from "@/components/RobotArm";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -47,18 +48,15 @@ const steps = [
   { mode: "step3" as const, title: "დაფა ადგილზე რჩება", text: "ModuArm უძრავად იჭერს დაფას, შენ კი აგრძელებ მუშაობას." },
 ];
 
-const tasks = [
-  { icon: "🔥", name: "რჩილვა", module: "GripFix მოდული", text: "მყარად იჭერს დაფას ან სადენს, რომ ორივე ხელი თავისუფალი გქონდეს." },
-  { icon: "🎥", name: "გადაღება", module: "CamMount მოდული", text: "ტელეფონს ან კამერას ნელა ამოძრავებს და სტაბილურ კადრს გაძლევს." },
-  { icon: "🔩", name: "წვრილი დეტალების დახარისხება", module: "PickSort მოდული", text: "ჭანჭიკებსა და ნაწილებს ფერის ან ზომის მიხედვით ალაგებს." },
-  { icon: "📐", name: "მასალის დაჭერა", module: "HoldPad მოდული", text: "აწებებისას ან ჭრისას მასალას სწორ კუთხეზე აჩერებს." },
-];
-
 const modules = [
-  { icon: "🔥", name: "რჩილვა", module: "GripFix მოდული", text: "მყარად იჭერს დაფას ან სადენს, რომ ორივე ხელი თავისუფალი გქონდეს." },
-  { icon: "🎥", name: "გადაღება", module: "CamMount მოდული", text: "ტელეფონს ან კამერას ნელა ამოძრავებს და სტაბილურ კადრს გაძლევს." },
-  { icon: "🔩", name: "დახარისხება", module: "PickSort მოდული", text: "ჭანჭიკებსა და ნაწილებს ფერის ან ზომის მიხედვით ალაგებს." },
-  { icon: "📐", name: "დაჭერა", module: "HoldPad მოდული", text: "აწებებისას ან ჭრისას მასალას სწორ კუთხეზე აჩერებს." },
+  { icon: "🔥", name: "რჩილვა", tool: "grip" as const, module: "GripFix მოდული", text: "მყარად იჭერს დაფას ან სადენს, რომ ორივე ხელი თავისუფალი გქონდეს." },
+  { icon: "🎥", name: "გადაღება", tool: "camera" as const, module: "CamMount მოდული", text: "ტელეფონს ან კამერას ნელა ამოძრავებს და სტაბილურ კადრს გაძლევს." },
+  { icon: "🔩", name: "დახარისხება", tool: "sorter" as const, module: "PickSort მოდული", text: "ჭანჭიკებსა და ნაწილებს ფერის ან ზომის მიხედვით ალაგებს." },
+  { icon: "📐", name: "დაჭერა", tool: "hold" as const, module: "HoldPad მოდული", text: "აწებებისას ან ჭრისას მასალას სწორ კუთხეზე აჩერებს." },
+  { icon: "🧹", name: "გაწმენდა", tool: "brush" as const, module: "SpinBrush მოდული", text: "მბრუნავი ჯაგრავი ზედაპირს ან დეტალებს წმენდს მტვრისგან." },
+  { icon: "✏️", name: "დახატვა", tool: "pen" as const, module: "PenGuide მოდული", text: "ფერადი ან მარკერის სტაბილურად დაჭერა ზუსტი ხაზებისთვის." },
+  { icon: "🌀", name: "ვაკუუმი", tool: "suction" as const, module: "VacuGrip მოდული", text: "ვაკუუმის საწოვარი ფისფარ ზედაპირს ზიანის გარეშე იჭერს." },
+  { icon: "💡", name: "განათება", tool: "led" as const, module: "BeamLight მოდული", text: "მართვადი LED წერტილოვნად ანათებს სამუშაო ადგილს." },
 ];
 
 function DaySection() {
@@ -122,7 +120,12 @@ function SwapSection() {
         <div className="mt-12 grid gap-10 md:grid-cols-2">
           <div className="self-start rounded-3xl bg-silver p-6">
             <div className="relative mx-auto h-72 w-full md:h-96">
-              <RobotArm className={`mx-auto h-72 w-full md:h-96 ${showTool ? "swap-tool-in" : "swap-tool-out"}`} mode="step3" />
+              <RobotArm
+                key={m.tool}
+                tool={m.tool as Tool}
+                className={`mx-auto h-72 w-full md:h-96 ${showTool ? "swap-tool-in" : "swap-tool-out"}`}
+                mode="step3"
+              />
             </div>
             <div className="mt-4 rounded-2xl bg-dark-muted p-5 text-secondary-foreground">
               <span className="text-xs font-semibold uppercase tracking-wider text-primary">მაგალითი</span>
@@ -130,17 +133,17 @@ function SwapSection() {
               <p key={`t-${active}`} className="swap-fade mt-1 text-dark-muted-foreground">{m.text}</p>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4 self-start">
+          <div className="grid grid-cols-2 gap-4 self-start md:grid-cols-2 lg:grid-cols-2">
             {modules.map((mod, i) => (
               <button
                 key={mod.name}
                 onClick={() => select(i)}
                 aria-pressed={active === i}
                 disabled={swapping}
-                className={`lift rounded-3xl border-2 bg-card p-6 text-left transition-colors ${active === i ? "border-primary swap-chip-active" : "border-transparent"}`}
+                className={`lift rounded-3xl border-2 bg-card p-5 text-left transition-colors ${active === i ? "border-primary swap-chip-active" : "border-transparent"}`}
               >
-                <span className="text-3xl" aria-hidden>{mod.icon}</span>
-                <span className="mt-3 block text-lg font-semibold leading-snug">{mod.name}</span>
+                <span className="text-2xl" aria-hidden>{mod.icon}</span>
+                <span className="mt-2 block text-base font-semibold leading-snug">{mod.name}</span>
               </button>
             ))}
           </div>
@@ -151,7 +154,6 @@ function SwapSection() {
 }
 
 function Index() {
-  const [task, setTask] = useState<number | null>(null);
   const [sent, setSent] = useState(false);
   const [err, setErr] = useState("");
 
@@ -199,28 +201,6 @@ function Index() {
       <DaySection />
 
       <SwapSection />
-
-      {/* Tasks */}
-      <section className="px-6 py-24">
-        <div className="mx-auto max-w-6xl">
-          <Reveal><h2 className="text-4xl font-extrabold md:text-5xl">აირჩიე შენი ამოცანა</h2></Reveal>
-          <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4">
-            {tasks.map((t, i) => (
-              <button key={t.name} onClick={() => setTask(i)} aria-pressed={task === i}
-                className={`lift rounded-3xl border-2 bg-card p-6 text-left ${task === i ? "border-primary" : "border-transparent"}`}>
-                <span className="text-3xl" aria-hidden>{t.icon}</span>
-                <span className="mt-3 block text-lg font-semibold leading-snug">{t.name}</span>
-              </button>
-            ))}
-          </div>
-          {task !== null && (
-            <div key={task} className="reveal in mt-6 rounded-3xl bg-silver p-8 text-secondary-foreground">
-                            <h3 className="text-2xl font-semibold">{tasks[task]!.module}</h3>
-              <p className="mt-2 text-dark-muted-foreground">{tasks[task]!.text}</p>
-            </div>
-          )}
-        </div>
-      </section>
 
       {/* Waitlist */}
       <section id="waitlist" className="bg-gunmetal px-6 py-24 text-secondary-foreground">
