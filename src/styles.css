@@ -180,6 +180,14 @@ body { font-family: var(--font-sans); font-size: 1.125rem; line-height: 1.65; }
 @keyframes jawL { 0%,100% { transform: translate(270px,130px) rotate(0deg) translate(-270px,-130px) } 50% { transform: translate(270px,130px) rotate(-18deg) translate(-270px,-130px) } }
 @keyframes jawR { 0%,100% { transform: translate(270px,130px) rotate(0deg) translate(-270px,-130px) } 50% { transform: translate(270px,130px) rotate(18deg) translate(-270px,-130px) } }
 @keyframes snap { 0% { transform: translateX(120px); opacity: 0 } 70% { transform: translateX(-4px); opacity: 1 } 100% { transform: none; opacity: 1 } }
+
+@keyframes swapToolOut { 0% { transform: none; opacity: 1 } 100% { transform: translate(-50px, 80px) rotate(20deg); opacity: 0 } }
+@keyframes swapToolIn { 0% { transform: translate(50px, -60px); opacity: 0 } 60% { transform: translate(-3px, 2px); opacity: 1 } 80% { transform: translate(2px, -1px); opacity: 1 } 100% { transform: none; opacity: 1 } }
+@keyframes swapFade { 0% { opacity: 0; transform: translateY(6px) } 100% { opacity: 1; transform: none } }
+.swap-tool-out { animation: swapToolOut .5s ease-in forwards; }
+.swap-tool-in { animation: swapToolIn .55s cubic-bezier(.3,1.4,.5,1) forwards; }
+.swap-fade { animation: swapFade .4s ease-out; }
+.swap-chip-active { box-shadow: 0 0 0 2px oklch(0.8 0.012 245), 0 8px 20px -8px oklch(0.8 0.012 245 / 0.4); }
 .arm-s1, .arm-s2, .arm-s3, .jaw-l, .jaw-r { transform-box: view-box; transition: transform .6s ease; }
 .arm-s1, .arm-s2, .arm-s3, .jaw-l, .jaw-r { transform-origin: 0 0; }
 .arm-anim .arm-s1 { animation: seg1 5s ease-in-out infinite; }

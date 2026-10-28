@@ -54,6 +54,13 @@ const tasks = [
   { icon: "📐", name: "მასალის დაჭერა", module: "HoldPad მოდული", text: "აწებებისას ან ჭრისას მასალას სწორ კუთხეზე აჩერებს." },
 ];
 
+const modules = [
+  { icon: "🔥", name: "რჩილვა", module: "GripFix მოდული", text: "მყარად იჭერს დაფას ან სადენს, რომ ორივე ხელი თავისუფალი გქონდეს." },
+  { icon: "🎥", name: "გადაღება", module: "CamMount მოდული", text: "ტელეფონს ან კამერას ნელა ამოძრავებს და სტაბილურ კადრს გაძლევს." },
+  { icon: "🔩", name: "დახარისხება", module: "PickSort მოდული", text: "ჭანჭიკებსა და ნაწილებს ფერის ან ზომის მიხედვით ალაგებს." },
+  { icon: "📐", name: "დაჭერა", module: "HoldPad მოდული", text: "აწებებისას ან ჭრისას მასალას სწორ კუთხეზე აჩერებს." },
+];
+
 function DaySection() {
   const [active, setActive] = useState(0);
   const refs = useRef<(HTMLDivElement | null)[]>([]);
@@ -82,6 +89,59 @@ function DaySection() {
                 <h3 className="mt-3 text-2xl font-semibold">{s.title}</h3>
                 <p className="mt-2 text-dark-muted-foreground">{s.text}</p>
               </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SwapSection() {
+  const [active, setActive] = useState(0);
+  const [swapping, setSwapping] = useState(false);
+  const [showTool, setShowTool] = useState(true);
+
+  const select = (i: number) => {
+    if (i === active || swapping) return;
+    setSwapping(true);
+    setShowTool(false);
+    window.setTimeout(() => {
+      setShowTool(true);
+      setActive(i);
+      setSwapping(false);
+    }, 500);
+  };
+
+  const m = modules[active]!;
+
+  return (
+    <section className="px-6 py-24">
+      <div className="mx-auto max-w-6xl">
+        <Reveal><h2 className="text-4xl font-extrabold md:text-5xl">შეცვალე მოდული</h2></Reveal>
+        <div className="mt-12 grid gap-10 md:grid-cols-2">
+          <div className="self-start rounded-3xl bg-silver p-6">
+            <div className="relative mx-auto h-72 w-full md:h-96">
+              <RobotArm className={`mx-auto h-72 w-full md:h-96 ${showTool ? "swap-tool-in" : "swap-tool-out"}`} mode="step3" />
+            </div>
+            <div className="mt-4 rounded-2xl bg-dark-muted p-5 text-secondary-foreground">
+              <span className="text-xs font-semibold uppercase tracking-wider text-primary">მაგალითი</span>
+              <h3 key={active} className="swap-fade mt-1 text-2xl font-semibold">{m.module}</h3>
+              <p key={`t-${active}`} className="swap-fade mt-1 text-dark-muted-foreground">{m.text}</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-4 self-start">
+            {modules.map((mod, i) => (
+              <button
+                key={mod.name}
+                onClick={() => select(i)}
+                aria-pressed={active === i}
+                disabled={swapping}
+                className={`lift rounded-3xl border-2 bg-card p-6 text-left transition-colors ${active === i ? "border-primary swap-chip-active" : "border-transparent"}`}
+              >
+                <span className="text-3xl" aria-hidden>{mod.icon}</span>
+                <span className="mt-3 block text-lg font-semibold leading-snug">{mod.name}</span>
+              </button>
             ))}
           </div>
         </div>
@@ -137,6 +197,8 @@ function Index() {
       </section>
 
       <DaySection />
+
+      <SwapSection />
 
       {/* Tasks */}
       <section className="px-6 py-24">
