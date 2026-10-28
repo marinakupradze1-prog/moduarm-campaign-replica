@@ -39,13 +39,13 @@ function Reveal({ children, className = "" }: { children: ReactNode; className?:
 const btn = "inline-flex items-center justify-center rounded-full bg-metal px-8 py-4 text-lg font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40";
 
 const problems: { icon: ReactNode; title: string; text: string }[] = [
-  { icon: <IconPrice className="h-7 w-7 text-primary-foreground" />, title: "ძალიან ძვირი", text: "სამრეწველო რობოტი ხელები ბევრად მეტი ღირს, ვიდრე სტუდენტს ან მეიქერს შეუძლია დახარჯოს." },
+  { icon: <IconPrice className="h-7 w-7 text-primary-foreground" />, title: "ძალიან ძვირი", text: "სამრეწველო რობოტი ხელები ბევრად მეტი ღირს, ვიდრე სტუდენტს ან ენთუზიასტს შეუძლია დახარჯოს." },
   { icon: <IconHand className="h-7 w-7 text-primary-foreground" />, title: "ზედმეტი ხელით სამუშაო", text: "რჩილვა ან გადაღება ხშირად დამატებით ხელებს მოითხოვს, რომლებიც არ გაქვს." },
   { icon: <IconGear className="h-7 w-7 text-primary-foreground" />, title: "ძალიან რთული", text: "რობოტიკის ინსტრუმენტების ათვისებას დიდი დრო სჭირდება." },
 ];
 
 const steps = [
-  { mode: "step1" as const, title: "რჩილავ და ორივე ხელი გჭირდება", text: "დაფა მოძრაობს, რჩილვის ღერო ხელშია — მესამე ხელი აკლია." },
+  { mode: "step1" as const, title: "რჩილავ და ორივე ხელი გჭირდება", text: "დაფა მოძრაობს, სარჩილავის ღერო ხელშია — მესამე ხელი აკლია." },
   { mode: "step2" as const, title: "ამაგრებ მოდულს", text: "პატარა მოდული მაგნიტურად ებმება ხელს — ერთ წამში." },
   { mode: "step3" as const, title: "დაფა ადგილზე რჩება", text: "ModuArm უძრავად იჭერს დაფას, შენ კი აგრძელებ მუშაობას." },
 ];
@@ -54,11 +54,11 @@ const modules = [
   { icon: moduleIcons.grip, name: "რჩილვა", tool: "grip" as const, module: "GripFix მოდული", text: "მყარად იჭერს დაფას ან სადენს, რომ ორივე ხელი თავისუფალი გქონდეს." },
   { icon: moduleIcons.camera, name: "გადაღება", tool: "camera" as const, module: "CamMount მოდული", text: "ტელეფონს ან კამერას ნელა ამოძრავებს და სტაბილურ კადრს გაძლევს." },
   { icon: moduleIcons.sorter, name: "დახარისხება", tool: "sorter" as const, module: "PickSort მოდული", text: "ჭანჭიკებსა და ნაწილებს ფერის ან ზომის მიხედვით ალაგებს." },
-  { icon: moduleIcons.hold, name: "დაჭერა", tool: "hold" as const, module: "HoldPad მოდული", text: "აწებებისას ან ჭრისას მასალას სწორ კუთხეზე აჩერებს." },
-  { icon: moduleIcons.brush, name: "გაწმენდა", tool: "brush" as const, module: "SpinBrush მოდული", text: "მბრუნავი ჯაგრავი ზედაპირს ან დეტალებს წმენდს მტვრისგან." },
-  { icon: moduleIcons.pen, name: "დახატვა", tool: "pen" as const, module: "PenGuide მოდული", text: "ფერადი ან მარკერის სტაბილურად დაჭერა ზუსტი ხაზებისთვის." },
-  { icon: moduleIcons.suction, name: "ვაკუუმი", tool: "suction" as const, module: "VacuGrip მოდული", text: "ვაკუუმის საწოვარი ფისფარ ზედაპირს ზიანის გარეშე იჭერს." },
-  { icon: moduleIcons.led, name: "განათება", tool: "led" as const, module: "BeamLight მოდული", text: "მართვადი LED წერტილოვნად ანათებს სამუშაო ადგილს." },
+  { icon: moduleIcons.hold, name: "დაჭერა", tool: "hold" as const, module: "HoldPad მოდული", text: "დაწებებისას ან ჭრისას მასალას სწორ კუთხეზე აჩერებს." },
+  { icon: moduleIcons.brush, name: "გაწმენდა", tool: "brush" as const, module: "SpinBrush მოდული", text: "მბრუნავი ჯაგრისი ზედაპირს ან დეტალებს წმენდს მტვრისგან." },
+  { icon: moduleIcons.pen, name: "დახატვა", tool: "pen" as const, module: "PenGuide მოდული", text: "ფანქრის ან მარკერის სტაბილურად დაჭერა ზუსტი ხაზებისთვის." },
+  { icon: moduleIcons.suction, name: "ვაკუუმი", tool: "suction" as const, module: "VacuGrip მოდული", text: "ვაკუუმის თავი გლუვ და ფაქიზ ზედაპირს ზიანის გარეშე იჭერს." },
+  { icon: moduleIcons.led, name: "განათება", tool: "led" as const, module: "BeamLight მოდული", text: "მართვადი LED განათება წერტილოვნად ანათებს სამუშაო ადგილს." },
 ];
 
 function DaySection() {
