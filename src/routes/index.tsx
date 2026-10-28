@@ -5,8 +5,8 @@ import { RobotArm } from "@/components/RobotArm";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "ModuArm — შენი პროექტის მესამე ხელი" },
-      { name: "description", content: "ModuArm — სტუდენტური პროტოტიპი: მოდულური რობოტი ხელი სტუდენტებისა და მეიქერებისთვის. შეუერთდი მოლოდინის სიას." },
+      { title: "ModuArm — მესამე ხელი შენი პროექტისთვის" },
+      { name: "description", content: "ModuArm — სტუდენტური პროტოტიპი: მოდულური რობოტი ხელი სტუდენტებისა და ტექნოლოგიის ენთუზიასტებისთვის. შეუერთდი მოლოდინის სიას." },
       { property: "og:title", content: "ModuArm — შენი პროექტის მესამე ხელი" },
       { property: "og:description", content: "მოდულური რობოტი ხელის სტუდენტური პროტოტიპი. შეუერთდი მოლოდინის სიას." },
       { property: "og:type", content: "website" },
@@ -111,8 +111,8 @@ function Index() {
           <p className="text-xl font-extrabold">Modu<span className="text-primary">Arm</span></p>
           <div className="mt-10 grid items-center gap-10 md:grid-cols-2">
             <Reveal>
-              <h1 className="text-5xl font-extrabold leading-tight md:text-6xl">შენი პროექტის <span className="text-metal">მესამე ხელი</span></h1>
-              <p className="mt-6 max-w-md text-xl text-muted-foreground">მოდულური რობოტი ხელის იდეა სტუდენტებისა და მეიქერებისთვის.</p>
+              <h1 className="text-5xl font-extrabold leading-tight md:text-6xl">მესამე ხელი <span className="text-metal">შენი პროექტისთვის</span></h1>
+              <p className="mt-6 max-w-md text-xl text-muted-foreground">მოდულური რობოტი ხელის იდეა სტუდენტებისა და ტექნოლოგიის ენთუზიასტებისთვის.</p>
               <a href="#waitlist" className={`${btn} mt-8`}>შემატყობინე გაშვებისას</a>
             </Reveal>
             <div className="rounded-3xl bg-silver p-6"><RobotArm className="mx-auto h-72 w-full md:h-96" /></div>
