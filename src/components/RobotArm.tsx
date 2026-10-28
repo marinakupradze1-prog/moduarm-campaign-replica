@@ -78,17 +78,30 @@ function Module({ className = "" }: { className?: string }) {
   );
 }
 
-/* Brush module head — a rotary brush for cleaning/polishing */
+/* Brush module head — a rotary brush disc with bristles */
 function BrushHead({ className = "" }: { className?: string }) {
   return (
     <g className={className}>
       <rect x="258" y="104" width="24" height="20" rx="5" fill="url(#mTool)" stroke="oklch(1 0 0 / 0.3)" strokeWidth="1" />
       <circle cx="270" cy="114" r="5" fill="url(#mJoint)" />
       <rect x="252" y="124" width="36" height="6" rx="3" fill="url(#mToolDark)" stroke="oklch(1 0 0 / 0.22)" strokeWidth="0.8" />
+      {/* spinning brush disc */}
       <g className="brush-spin">
-        <rect x="260" y="130" width="20" height="6" rx="3" fill="oklch(0.55 0.02 70)" stroke="oklch(1 0 0 / 0.2)" strokeWidth="0.6" />
-        <rect x="263" y="136" width="14" height="5" rx="2.5" fill="oklch(0.6 0.02 80)" />
-        <rect x="266" y="141" width="8" height="4" rx="2" fill="oklch(0.65 0.02 90)" />
+        <circle cx="270" cy="140" r="11" fill="oklch(0.35 0.01 258)" stroke="oklch(0.5 0.01 255)" strokeWidth="1" />
+        <circle cx="270" cy="140" r="8" fill="none" stroke="oklch(0.6 0.01 250)" strokeWidth="0.8" />
+        <line x1="270" y1="129" x2="270" y2="151" stroke="oklch(0.7 0.01 250)" strokeWidth="0.6" />
+        <line x1="259" y1="140" x2="281" y2="140" stroke="oklch(0.7 0.01 250)" strokeWidth="0.6" />
+        <line x1="262.5" y1="132.5" x2="277.5" y2="147.5" stroke="oklch(0.7 0.01 250)" strokeWidth="0.6" />
+        <line x1="277.5" y1="132.5" x2="262.5" y2="147.5" stroke="oklch(0.7 0.01 250)" strokeWidth="0.6" />
+        {/* bristle tips */}
+        <circle cx="270" cy="129" r="1.2" fill="oklch(0.65 0.02 70)" />
+        <circle cx="270" cy="151" r="1.2" fill="oklch(0.65 0.02 70)" />
+        <circle cx="259" cy="140" r="1.2" fill="oklch(0.65 0.02 70)" />
+        <circle cx="281" cy="140" r="1.2" fill="oklch(0.65 0.02 70)" />
+        <circle cx="262.5" cy="132.5" r="1" fill="oklch(0.6 0.02 70)" />
+        <circle cx="277.5" cy="132.5" r="1" fill="oklch(0.6 0.02 70)" />
+        <circle cx="262.5" cy="147.5" r="1" fill="oklch(0.6 0.02 70)" />
+        <circle cx="277.5" cy="147.5" r="1" fill="oklch(0.6 0.02 70)" />
       </g>
     </g>
   );

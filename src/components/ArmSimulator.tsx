@@ -1,4 +1,4 @@
-import { useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { IconCheck, IconSpark } from "@/components/Icons";
 
 type Vec = { x: number; y: number };
@@ -7,13 +7,12 @@ const BASE: Vec = { x: 120, y: 250 };
 const L1 = 90;
 const L2 = 95;
 const L3 = 50;
-const BOARD_HOME: Vec = { x: 232, y: 262 };
+const BOARD_HOME: Vec = { x: 240, y: 262 };
 const BOARD_W = 26;
 const BOARD_H = 8;
-const ZONE: Vec = { x: 180, y: 140 };
-const ZONE_R = 26;
-const GRAB_RANGE = 30;
-const ZONE_RANGE = 26;
+const ZONE: Vec = { x: 165, y: 145 };
+const ZONE_R = 38;
+const GRAB_RANGE = 40;
 
 function fwd(rot1: number, rot2: number, rot3: number) {
   const a1 = (rot1 * Math.PI) / 180;
@@ -69,42 +68,45 @@ function Reveal({ children, className = "" }: { children: ReactNode; className?:
 }
 
 export function ArmSimulator() {
-  const [rot1, setRot1] = useState(20);
-  const [rot2, setRot2] = useState(50);
-  const [rot3, setRot3] = useState(20);
-  const [gripOpen, setGripOpen] = useState(true);
+  const [rot1, setRot1] = useState(40);
+  const [rot2, setRot2] = useState(70);
+  const [rot3, setRot3] = useState(-30);
   const [holding, setHolding] = useState(false);
   const [success, setSuccess] = useState(false);
 
   const { j1, j2, tip, a3 } = fwd(rot1, rot2, rot3);
 
-  const gripMid: Vec = { x: tip.x + 6 * Math.sin(a3), y: tip.y + 6 * Math.cos(a3) };
+  const gripMid: Vec = { x: tip.x + 8 * Math.sin(a3), y: tip.y + 8 * Math.cos(a3) };
   const boardPos: Vec = holding ? gripMid : BOARD_HOME;
   const distToBoard = Math.hypot(gripMid.x - BOARD_HOME.x, gripMid.y - BOARD_HOME.y);
   const distToZone = Math.hypot(boardPos.x - ZONE.x, boardPos.y - ZONE.y);
 
-  const canGrab = !holding && distToBoard < GRAB_RANGE && !gripOpen;
-  const inZone = holding && distToZone < ZONE_RANGE;
+  const nearBoard = !holding && distToBoard < GRAB_RANGE;
+  const inZone = holding && distToZone < ZONE_R;
+
+  // Auto-detect success whenever the held board enters the zone
+  useEffect(() => {
+    if (holding && distToZone < ZONE_R) setSuccess(true);
+  }, [holding, distToZone]);
 
   const grab = () => {
     if (holding) {
       setHolding(false);
+      setSuccess(false);
     } else if (distToBoard < GRAB_RANGE) {
       setHolding(true);
-      if (distToZone < ZONE_RANGE) setSuccess(true);
     }
   };
 
   const reset = () => {
     setSuccess(false);
     setHolding(false);
-    setRot1(20);
-    setRot2(50);
-    setRot3(20);
-    setGripOpen(true);
+    setRot1(40);
+    setRot2(70);
+    setRot3(-30);
   };
 
-  const jawSpread = gripOpen ? 7 : 2;
+  const jawSpread = holding ? 2 : 6;
 
   const check1 = distToBoard < GRAB_RANGE;
   const check2 = holding;
@@ -130,8 +132,9 @@ export function ArmSimulator() {
           <div className="rounded-3xl bg-silver p-6">
             <svg viewBox="0 0 320 300" className="sim-svg mx-auto h-72 w-full md:h-96" role="img" aria-label="რობოტი ხელის სიმულაცია">
               <MetalDefs />
-              {/* holding zone */}
-              <circle cx={ZONE.x} cy={ZONE.y} r={ZONE_R} fill="oklch(0.8 0.012 245 / 0.06)" stroke="oklch(0.8 0.012 245 / 0.5)" strokeWidth="1.5" strokeDasharray="5 4" />
+
+              {/* work zone */}
+              <circle cx={ZONE.x} cy={ZONE.y} r={ZONE_R} fill={inZone ? "oklch(0.7 0.15 145 / 0.12)" : "oklch(0.8 0.012 245 / 0.06)"} stroke={inZone ? "oklch(0.7 0.15 145 / 0.6)" : "oklch(0.8 0.012 245 / 0.5)"} strokeWidth="1.5" strokeDasharray="5 4" />
               <text x={ZONE.x} y={ZONE.y - ZONE_R - 4} textAnchor="middle" fontSize="8" fill="oklch(0.72 0.01 250)" className="font-sans font-semibold">სამუშაო ზონა</text>
 
               {/* table */}
@@ -170,7 +173,7 @@ export function ArmSimulator() {
               </g>
 
               {/* grab range hint */}
-              {!holding && distToBoard < GRAB_RANGE && (
+              {nearBoard && (
                 <circle cx={BOARD_HOME.x} cy={BOARD_HOME.y} r={GRAB_RANGE} fill="none" stroke="oklch(0.8 0.012 245 / 0.4)" strokeWidth="1" strokeDasharray="3 3" className="sim-hint" />
               )}
             </svg>
@@ -200,9 +203,9 @@ export function ArmSimulator() {
               <div className="flex gap-3">
                 <button
                   onClick={grab}
-                  className="flex-1 rounded-full bg-metal px-6 py-4 text-lg font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40"
+                  className={`flex-1 rounded-full px-6 py-4 text-lg font-semibold transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring/40 ${holding ? "border-2 border-primary text-primary" : "bg-metal text-primary-foreground"}`}
                 >
-                  {gripOpen ? "დაიჭირე" : "გაუშვი"}
+                  {holding ? "გაუშვი" : "დაიჭირე"}
                 </button>
                 <button
                   onClick={reset}
@@ -215,6 +218,7 @@ export function ArmSimulator() {
                 {!holding && distToBoard < GRAB_RANGE && "დაფა ახლოა — დააჭირე „დაიჭირე“-ს"}
                 {!holding && distToBoard >= GRAB_RANGE && "მიიყვანე ხელი დაფასთან, რომ დაიჭირო"}
                 {holding && !inZone && "აწიე დაფა სამუშაო ზონაში"}
+                {holding && inZone && "მშვენივრად! დაფა სამუშაო ზონაშია"}
               </p>
             </div>
           </div>
