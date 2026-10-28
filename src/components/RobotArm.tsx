@@ -27,14 +27,17 @@ export function RobotArm({ mode = "hero", className = "" }: { mode?: Mode; class
   return (
     <svg
       viewBox="0 0 320 300"
-      className={`${animate ? "arm-anim" : ""} ${mode === "hero" ? "arm-look" : ""} ${className}`}
+      className={`${animate ? "arm-anim" : ""} ${mode === "step3" ? "arm-work" : ""} ${mode === "hero" ? "arm-look" : ""} ${className}`}
       role="img"
       aria-label="რობოტი ხელის ილუსტრაცია"
     >
       <rect x="70" y="262" width="100" height="22" rx="8" className="fill-secondary" />
       <rect x="95" y="245" width="50" height="22" rx="6" className="fill-dark-muted" />
       {mode === "step3" && (
-        <rect x="235" y="152" width="70" height="10" rx="3" className="fill-dark-muted" />
+        <g className="work-board">
+          <rect x="225" y="160" width="90" height="10" rx="3" className="fill-dark-muted" />
+          <rect x="255" y="156" width="30" height="4" rx="2" className="fill-primary" />
+        </g>
       )}
       <g className="arm-s1">
         <line x1="120" y1="250" x2="120" y2="160" strokeWidth="24" strokeLinecap="round" className="stroke-primary" />
@@ -52,7 +55,13 @@ export function RobotArm({ mode = "hero", className = "" }: { mode?: Mode; class
                 <Module className="tool-in" />
               </>
             )}
-            {mode === "step3" && <Module />}
+            {mode === "step3" && (
+              <>
+                <Module />
+                <circle className="work-light fill-primary" cx="270" cy="116" r="5" />
+                <circle className="work-spark fill-primary" cx="270" cy="156" r="6" />
+              </>
+            )}
           </g>
         </g>
       </g>
