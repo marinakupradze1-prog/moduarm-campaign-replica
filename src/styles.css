@@ -173,17 +173,14 @@ body { font-family: var(--font-sans); font-size: 1.125rem; line-height: 1.65; }
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
 .reveal.in { opacity: 1; transform: none; }
 
-@keyframes seg1 { 0%,100% { transform: rotate(-4deg) } 50% { transform: rotate(4deg) } }
-@keyframes seg2 { 0%,100% { transform: rotate(6deg) } 50% { transform: rotate(-6deg) } }
-@keyframes seg3 { 0%,100% { transform: rotate(-5deg) } 50% { transform: rotate(5deg) } }
-@keyframes jawL { 0%,100% { transform: rotate(0) } 50% { transform: rotate(-18deg) } }
-@keyframes jawR { 0%,100% { transform: rotate(0) } 50% { transform: rotate(18deg) } }
+@keyframes seg1 { 0%,100% { transform: translate(120px,250px) rotate(-4deg) translate(-120px,-250px) } 50% { transform: translate(120px,250px) rotate(4deg) translate(-120px,-250px) } }
+@keyframes seg2 { 0%,100% { transform: translate(120px,160px) rotate(6deg) translate(-120px,-160px) } 50% { transform: translate(120px,160px) rotate(-6deg) translate(-120px,-160px) } }
+@keyframes seg3 { 0%,100% { transform: translate(210px,110px) rotate(-5deg) translate(-210px,-110px) } 50% { transform: translate(210px,110px) rotate(5deg) translate(-210px,-110px) } }
+@keyframes jawL { 0%,100% { transform: translate(270px,130px) rotate(0deg) translate(-270px,-130px) } 50% { transform: translate(270px,130px) rotate(-18deg) translate(-270px,-130px) } }
+@keyframes jawR { 0%,100% { transform: translate(270px,130px) rotate(0deg) translate(-270px,-130px) } 50% { transform: translate(270px,130px) rotate(18deg) translate(-270px,-130px) } }
 @keyframes snap { 0% { transform: translateX(120px); opacity: 0 } 70% { transform: translateX(-4px); opacity: 1 } 100% { transform: none; opacity: 1 } }
 .arm-s1, .arm-s2, .arm-s3, .jaw-l, .jaw-r { transform-box: view-box; transition: transform .6s ease; }
-.arm-s1 { transform-origin: 120px 250px; }
-.arm-s2 { transform-origin: 120px 160px; }
-.arm-s3 { transform-origin: 210px 110px; }
-.jaw-l, .jaw-r { transform-origin: 270px 130px; }
+.arm-s1, .arm-s2, .arm-s3, .jaw-l, .jaw-r { transform-origin: 0 0; }
 .arm-anim .arm-s1 { animation: seg1 5s ease-in-out infinite; }
 .arm-anim .arm-s2 { animation: seg2 5s ease-in-out infinite; }
 .arm-anim .arm-s3 { animation: seg3 5s ease-in-out infinite; }
